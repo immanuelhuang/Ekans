@@ -22,6 +22,7 @@ function Map:init()
 end
 
 function Map:update(dt)
+    local pokeNum = math.random(810)
     if self.timer % 10 == 0 then
         self.timer = self.timer - 10
         local tempX = self.trainer.x
@@ -47,6 +48,7 @@ function Map:update(dt)
             table.insert(self.caughtPokemon, 1, table.remove(self.caughtPokemon, tablelength(self.caughtPokemon)))
             self.currPokemon.x = math.random(20)
             self.currPokemon.y = math.random(20)
+            self.currPokemon.spritesheet = love.graphics.newImage(string.format("graphics/pokemon/%03d.png", pokeNum))
         elseif tablelength(self.caughtPokemon) ~= 0 then
             self.caughtPokemon[tablelength(self.caughtPokemon)].x = tempX
             self.caughtPokemon[tablelength(self.caughtPokemon)].y = tempY

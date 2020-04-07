@@ -1,24 +1,26 @@
 require 'Util'
 
-local UP_1 = 7
-local UP_2 = 8
-local LEFT_1 = 3
-local LEFT_2 = 4
-local DOWN_1 = 1
-local DOWN_2 = 2
-local RIGHT_1 = 5
-local RIGHT_2 = 6
+local UP_1 = 14
+local UP_2 = 15
+local LEFT_1 = 6
+local LEFT_2 = 7
+local DOWN_1 = 2
+local DOWN_2 = 3
+local RIGHT_1 = 10
+local RIGHT_2 = 11
 
 Pokemon = Class{}
 
-math.randomseed(os.time() + 2)
+math.randomseed(os.time())
 
 local X = math.random(10) 
 local Y = math.random(20)
+local pokeNum = math.random(810)
 
 function Pokemon:init(map)
 
-    self.spritesheet = love.graphics.newImage('graphics/pokemon.png')
+    -- self.spritesheet = love.graphics.newImage('graphics/pokemon/005.png')
+    self.spritesheet = love.graphics.newImage(string.format("graphics/pokemon/%03d.png", pokeNum))
     self.sprites = generateQuads(self.spritesheet, 32, 32)
 
     self.tileWidth = 32
