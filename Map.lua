@@ -17,6 +17,7 @@ function Map:init()
     self.currPokemon = Pokemon(self)
     self.caughtPokemon = {}
     self.trainer = Trainer(self)
+    
 end
 
 function Map:update(dt)
@@ -34,7 +35,6 @@ end
   
 function Map:render()
     push:apply('start')
-
     for y = 1, self.mapHeight do
         for x = 1, self.mapWidth do
             love.graphics.draw(GRASS, (x - 1) * self.tileWidth, (y - 1) * self.tileHeight)
@@ -42,8 +42,5 @@ function Map:render()
     end
     push:apply('end')
     self.currPokemon:render()
-    self.trainer:render()
-    love.graphics.print(self.trainer.x, 0, 10)
-    
-
+    self.trainer:render()    
 end
