@@ -62,6 +62,10 @@ function Map:update(dt)
             end
             self.currPokemon.x = math.random(20)
             self.currPokemon.y = math.random(20)
+            while not checkRandomCollision() do
+                self.currPokemon.x = math.random(20)
+                self.currPokemon.y = math.random(20)
+            end
             self.currPokemon.spritesheet = love.graphics.newImage(string.format("graphics/pokemon/%03d.png", pokeNum))
         elseif tablelength(self.caughtPokemon) ~= 0 then
             self.caughtPokemon[tablelength(self.caughtPokemon)].x = tempX
@@ -87,7 +91,21 @@ function Map:update(dt)
     self.timer = self.timer + 1
 end
 
+function checkRandomCollision()
 
+    if map.currPokemon.x == map.trainer.x and map.currPokemon.y == map.trainer.y then
+        return false
+    else
+        for _, v in pairs(map.caughtPokemon) do
+        
+            if map.currPokemon.x == v.x and map.currPokemon.y == v.y then
+                return false
+            end
+        end
+    end
+    return true
+
+end
   
 function Map:render()
     push:apply('start')

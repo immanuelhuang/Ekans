@@ -11,20 +11,21 @@ WINDOW_HEIGHT = 640
 VIRTUAL_WIDTH = 160
 VIRTUAL_HEIGHT = 160
 
-map = Map()
+
+math.randomseed(os.time())
 
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     love.window.setTitle('Ekans')
-    math.randomseed(os.time())
-
+    map = Map()
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = false
     })
 
-    largeFont = love.graphics.newFont('font.ttf', 16)
+    largeFont = love.graphics.newFont('pokemon_font.ttf', 16)
+    smallFont = love.graphics.newFont('regular_font.ttf', 8)
 
     gameState = 'start'
 end
@@ -73,6 +74,10 @@ function love.keypressed(key)
                 TRAINER_ANIMATION = 0
             end
         end
+    elseif gameState == 'end' then
+        if key == 'space' then
+            love.load()
+        end
     end
     
 end
@@ -87,7 +92,10 @@ function love.draw()
         love.graphics.setFont(largeFont)
         love.graphics.printf({{255, 255, 0, 255}, 'EKANS'}, 0, 10, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'end' then
+        love.graphics.setFont(largeFont)
         love.graphics.printf({{255, 255, 0, 255}, 'GAME OVER'}, 0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.setFont(smallFont)
+        love.graphics.printf({{255, 255, 0, 255}, 'SPACE TO RESTART'}, 0, 50, VIRTUAL_WIDTH, 'center')
     end
 
     push:apply('end')
