@@ -46,6 +46,20 @@ function Map:update(dt)
             self.caughtPokemon[tablelength(self.caughtPokemon)].x = tempX
             self.caughtPokemon[tablelength(self.caughtPokemon)].y = tempY
             table.insert(self.caughtPokemon, 1, table.remove(self.caughtPokemon, tablelength(self.caughtPokemon)))
+            if tablelength(self.caughtPokemon) > 1 then
+                local nextX = self.caughtPokemon[tablelength(self.caughtPokemon) - 1].spritesheet
+                local currSprite = self.caughtPokemon[tablelength(self.caughtPokemon)].spritesheet
+                for i = tablelength(self.caughtPokemon), 1, -1 do
+                    if i == 1 then
+                        self.caughtPokemon[tablelength(self.caughtPokemon)].spritesheet = nextSprite
+                    else
+                        nextSprite = self.caughtPokemon[i - 1].spritesheet
+                        self.caughtPokemon[i - 1].spritesheet = currSprite
+                        currSprite = nextSprite
+                        
+                    end
+                end
+            end
             self.currPokemon.x = math.random(20)
             self.currPokemon.y = math.random(20)
             self.currPokemon.spritesheet = love.graphics.newImage(string.format("graphics/pokemon/%03d.png", pokeNum))
@@ -53,8 +67,22 @@ function Map:update(dt)
             self.caughtPokemon[tablelength(self.caughtPokemon)].x = tempX
             self.caughtPokemon[tablelength(self.caughtPokemon)].y = tempY
             table.insert(self.caughtPokemon, 1, table.remove(self.caughtPokemon, tablelength(self.caughtPokemon)))
+            if tablelength(self.caughtPokemon) > 1 then
+                local nextSprite = self.caughtPokemon[tablelength(self.caughtPokemon) - 1].spritesheet
+                local currSprite = self.caughtPokemon[tablelength(self.caughtPokemon)].spritesheet
+                for i = tablelength(self.caughtPokemon), 1, -1 do
+                    if i == 1 then
+                        self.caughtPokemon[tablelength(self.caughtPokemon)].spritesheet = nextSprite
+                    else
+                        nextSprite = self.caughtPokemon[i - 1].spritesheet
+                        self.caughtPokemon[i - 1].spritesheet = currSprite
+                        currSprite = nextSprite
+                        
+                    end
+                end
+            end
         end
-        
+       
     end
     self.timer = self.timer + 1
 end

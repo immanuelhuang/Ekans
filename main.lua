@@ -16,7 +16,7 @@ map = Map()
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
-    love.window.setTitle('Arbok')
+    love.window.setTitle('Ekans')
     math.randomseed(os.time())
 
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -85,7 +85,7 @@ function love.draw()
     push:apply('start')
     if gameState == 'start' then
         love.graphics.setFont(largeFont)
-        love.graphics.printf({{255, 255, 0, 255}, 'ARBOK'}, 0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf({{255, 255, 0, 255}, 'EKANS'}, 0, 10, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'end' then
         love.graphics.printf({{255, 255, 0, 255}, 'GAME OVER'}, 0, 10, VIRTUAL_WIDTH, 'center')
     end
