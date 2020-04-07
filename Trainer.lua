@@ -42,15 +42,14 @@ function Trainer:init(map)
 end
 
 function Trainer:update(dt)
-    if self.timer % 15 == 0 then
-        self.timer = self.timer - 15
-        self.x = self.x + 1 * self.dx
-        self.y = self.y + 1 * self.dy
-        TRAINER_ANIMATION = TRAINER_ANIMATION + 1
-        if TRAINER_ANIMATION == 2 then
-            TRAINER_ANIMATION = 0
-        end
+
+    self.x = self.x + 1 * self.dx
+    self.y = self.y + 1 * self.dy
+    TRAINER_ANIMATION = TRAINER_ANIMATION + 1
+    if TRAINER_ANIMATION == 2 then
+        TRAINER_ANIMATION = 0
     end
+
 
     if self.direction == 'up' then
         self.sprite = self.sprites[UP_1 + TRAINER_ANIMATION]
@@ -62,7 +61,6 @@ function Trainer:update(dt)
         self.sprite = self.sprites[RIGHT_1 + TRAINER_ANIMATION]
     end
 
-    self.timer = self.timer + 1
 end
 
 function Trainer:render()

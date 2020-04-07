@@ -17,22 +17,37 @@ function Map:init()
     self.currPokemon = Pokemon(self)
     self.caughtPokemon = {}
     self.trainer = Trainer(self)
+    self.timer = 0
     
 end
 
 function Map:update(dt)
-    self.trainer:update(dt)
-    self.currPokemon:update(dt)
-    for k, v in pairs(self.caughtPokemon) do
-        v:update(dt)
+    if self.timer % 15 == 0 then
+        self.timer = self.timer - 15
+        local tempX = self.trainer.x
+        local tempY = self.trainer.y
+
+        self.trainer:update(dt)
+        self.currPokemon:update(dt)
+        for k, v in pairs(self.caughtPokemon) do
+            v:update(dt)
+        end
+        if self.currPokemon.x == self.trainer.x and self.currPokemon.y == self.trainer.y then
+            pokemon = self.currPokemon:clone()
+            table.insert(self.caughtPokemon, tablelength(self.caughtPokemon) + 1, pokemon)
+            self.caughtPokemon[tablelength(self.caughtPokemon)].x = tempX
+            self.caughtPokemon[tablelength(self.caughtPokemon)].y = tempY
+            table.insert(self.caughtPokemon, 1, table.remove(self.caughtPokemon, tablelength(self.caughtPokemon)))
+            self.currPokemon.x = math.random(20)
+            self.currPokemon.y = math.random(20)
+        elseif tablelength(self.caughtPokemon) ~= 0 then
+            self.caughtPokemon[tablelength(self.caughtPokemon)].x = tempX
+            self.caughtPokemon[tablelength(self.caughtPokemon)].y = tempY
+            table.insert(self.caughtPokemon, 1, table.remove(self.caughtPokemon, tablelength(self.caughtPokemon)))
+        end
+        
     end
-    if self.currPokemon.x == self.trainer.x and self.currPokemon.y == self.trainer.y then
-        pokemon = self.currPokemon:clone()
-        table.insert(self.caughtPokemon, pokemon)
-        self.caughtPokemon[tablelength(self.caughtPokemon)].x = self.caughtPokemon[tablelength(self.caughtPokemon)].x + 1
-        self.currPokemon.x = math.random(20)
-        self.currPokemon.y = math.random(20)
-    end
+    self.timer = self.timer + 1
 end
 
 
@@ -45,22 +60,24 @@ function Map:render()
     --     end
     -- end
     -- push:apply('end')
+
     for k, v in pairs(self.caughtPokemon) do
-        v.direction = self.trainer.direction
-        if self.trainer.direction == 'up' then
-            v.x = self.trainer.x + k
-            v.y = self.trainer.y
-        elseif self.trainer.direction == 'down' then
-            v.x = self.trainer.x - k
-            v.y = self.trainer.y
-        elseif self.trainer.direction == 'right' then
-            v.x = self.trainer.x
-            v.y = self.trainer.y - k
-        elseif self.trainer.direction == 'left' then
-            v.x = self.trainer.x
-            v.y = self.trainer.y + k
-        end
+        -- v.direction = self.trainer.direction
+        -- if self.trainer.direction == 'up' then
+        --     v.x = self.trainer.x + k
+        --     v.y = self.trainer.y
+        -- elseif self.trainer.direction == 'down' then
+        --     v.x = self.trainer.x - k
+        --     v.y = self.trainer.y
+        -- elseif self.trainer.direction == 'right' then
+        --     v.x = self.trainer.x
+        --     v.y = self.trainer.y - k
+        -- elseif self.trainer.direction == 'left' then
+        --     v.x = self.trainer.x
+        --     v.y = self.trainer.y + k
+        -- end
         v:render()
+
     end
     self.currPokemon:render()
     self.trainer:render()    
