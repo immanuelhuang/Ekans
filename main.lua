@@ -39,43 +39,56 @@ function love.keypressed(key)
     if key == 'escape' then
         love.event.quit()
     end
-    if key == 'up' then
-        gameState = 'play'
-        map.trainer.dx = -1
-        map.trainer.dy = 0
-        map.trainer.direction = 'up'
-        TRAINER_ANIMATION = 0
-    elseif key == 'down' then
-        gameState = 'play'
-        map.trainer.dx = 1
-        map.trainer.dy = 0
-        map.trainer.direction = 'down'
-        TRAINER_ANIMATION = 0
-    elseif key == 'left' then
-        gameState = 'play'
-        map.trainer.dy = -1
-        map.trainer.dx = 0
-        map.trainer.direction = 'left'
-        TRAINER_ANIMATION = 0
-    elseif key == 'right' then
-        gameState = 'play'
-        map.trainer.dy = 1
-        map.trainer.dx = 0
-        map.trainer.direction = 'right'
-        TRAINER_ANIMATION = 0
+    if gameState == 'play' or gameState == 'start' then
+        if key == 'up' then
+            if map.trainer.direction ~= 'down' then
+                gameState = 'play'
+                map.trainer.dx = -1
+                map.trainer.dy = 0
+                map.trainer.direction = 'up'
+                TRAINER_ANIMATION = 0
+            end
+        elseif key == 'down' then
+            if map.trainer.direction ~= 'up' then
+                gameState = 'play'
+                map.trainer.dx = 1
+                map.trainer.dy = 0
+                map.trainer.direction = 'down'
+                TRAINER_ANIMATION = 0
+            end
+        elseif key == 'left' then
+            if map.trainer.direction ~= 'right' then
+                gameState = 'play'
+                map.trainer.dy = -1
+                map.trainer.dx = 0
+                map.trainer.direction = 'left'
+                TRAINER_ANIMATION = 0
+            end
+        elseif key == 'right' then
+            if map.trainer.direction ~= 'left' then
+                gameState = 'play'
+                map.trainer.dy = 1
+                map.trainer.dx = 0
+                map.trainer.direction = 'right'
+                TRAINER_ANIMATION = 0
+            end
+        end
     end
     
 end
 
 function love.draw()        
-    -- love.graphics.clear(78/255, 153/255, 43/255, 255/255)
-    love.graphics.clear(0/255, 0/255, 0/255, 255/255)
+    love.graphics.clear(78/255, 153/255, 43/255, 255/255)
+    -- love.graphics.clear(0/255, 0/255, 0/255, 255/255)
 
     map:render()
     push:apply('start')
     if gameState == 'start' then
         love.graphics.setFont(largeFont)
         love.graphics.printf({{255, 255, 0, 255}, 'ARBOK'}, 0, 10, VIRTUAL_WIDTH, 'center')
+    elseif gameState == 'end' then
+        love.graphics.printf({{255, 255, 0, 255}, 'GAME OVER'}, 0, 10, VIRTUAL_WIDTH, 'center')
     end
+
     push:apply('end')
 end

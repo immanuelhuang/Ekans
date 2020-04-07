@@ -22,8 +22,8 @@ function Map:init()
 end
 
 function Map:update(dt)
-    if self.timer % 15 == 0 then
-        self.timer = self.timer - 15
+    if self.timer % 10 == 0 then
+        self.timer = self.timer - 10
         local tempX = self.trainer.x
         local tempY = self.trainer.y
 
@@ -32,6 +32,13 @@ function Map:update(dt)
         for k, v in pairs(self.caughtPokemon) do
             v:update(dt)
         end
+
+        for k, v in pairs(self.caughtPokemon) do
+            if v.x == self.trainer.x and v.y == self.trainer.y then
+                gameState = 'end'
+            end
+        end
+
         if self.currPokemon.x == self.trainer.x and self.currPokemon.y == self.trainer.y then
             pokemon = self.currPokemon:clone()
             table.insert(self.caughtPokemon, tablelength(self.caughtPokemon) + 1, pokemon)
@@ -53,32 +60,20 @@ end
 
   
 function Map:render()
-    -- push:apply('start')
-    -- for y = 1, self.mapHeight do
-    --     for x = 1, self.mapWidth do
-    --         love.graphics.draw(GRASS, (x - 1) * self.tileWidth, (y - 1) * self.tileHeight)
-    --     end
-    -- end
-    -- push:apply('end')
+    push:apply('start')
+    for y = 1, self.mapHeight do
+        for x = 1, self.mapWidth do
+            love.graphics.draw(GRASS, (x - 1) * self.tileWidth, (y - 1) * self.tileHeight)
+        end
+    end
+    push:apply('end')
 
     for k, v in pairs(self.caughtPokemon) do
-        -- v.direction = self.trainer.direction
-        -- if self.trainer.direction == 'up' then
-        --     v.x = self.trainer.x + k
-        --     v.y = self.trainer.y
-        -- elseif self.trainer.direction == 'down' then
-        --     v.x = self.trainer.x - k
-        --     v.y = self.trainer.y
-        -- elseif self.trainer.direction == 'right' then
-        --     v.x = self.trainer.x
-        --     v.y = self.trainer.y - k
-        -- elseif self.trainer.direction == 'left' then
-        --     v.x = self.trainer.x
-        --     v.y = self.trainer.y + k
-        -- end
+        
         v:render()
 
     end
+
     self.currPokemon:render()
     self.trainer:render()    
 end

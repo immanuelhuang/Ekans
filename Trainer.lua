@@ -45,11 +45,20 @@ function Trainer:update(dt)
 
     self.x = self.x + 1 * self.dx
     self.y = self.y + 1 * self.dy
+    if self.x > 20 then
+        self.x = 1
+    elseif self.x < 1 then
+        self.x = 20
+    end
+    if self.y > 20 then
+        self.y = 1
+    elseif self.y <= 0 then
+        self.y = 20
+    end
     TRAINER_ANIMATION = TRAINER_ANIMATION + 1
     if TRAINER_ANIMATION == 2 then
         TRAINER_ANIMATION = 0
     end
-
 
     if self.direction == 'up' then
         self.sprite = self.sprites[UP_1 + TRAINER_ANIMATION]

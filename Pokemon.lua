@@ -42,17 +42,12 @@ function Pokemon:init(map)
 end
 
 function Pokemon:update(dt)
-    if self.timer % 15 == 0 then
-        self.timer = self.timer - 15
-        self.x = self.x + 1 * self.dx
-        self.y = self.y + 1 * self.dy
-        self.animation = self.animation + 1
-        if self.animation == 2 then
-            self.animation = 0
-        end
+    self.x = self.x + 1 * self.dx
+    self.y = self.y + 1 * self.dy
+    self.animation = self.animation + 1
+    if self.animation == 2 then
+        self.animation = 0
     end
-
-
 
     if self.direction == 'up' then
         self.sprite = self.sprites[UP_1 + self.animation]
@@ -64,7 +59,6 @@ function Pokemon:update(dt)
         self.sprite = self.sprites[RIGHT_1 + self.animation]
     end
 
-    self.timer = self.timer + 1
 end
 
 function Pokemon:render()
