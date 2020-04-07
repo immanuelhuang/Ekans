@@ -22,6 +22,7 @@ end
 
 function Map:update(dt)
     self.trainer:update(dt)
+    self.currPokemon:update(dt)
     if self.currPokemon.x == self.trainer.x and self.currPokemon.y == self.trainer.y then
         pokemon = self.currPokemon:clone()
         table.insert(self.caughtPokemon, pokemon)
