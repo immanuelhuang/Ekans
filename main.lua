@@ -24,8 +24,8 @@ function love.load()
         resizable = false
     })
 
-    largeFont = love.graphics.newFont('pokemon_font.ttf', 16)
-    smallFont = love.graphics.newFont('regular_font.ttf', 8)
+    largeFont = love.graphics.newFont('fonts/pokemon_font.ttf', 16)
+    smallFont = love.graphics.newFont('fonts/regular_font.ttf', 8)
 
     gameState = 'start'
 end
