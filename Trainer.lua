@@ -27,12 +27,17 @@ function Trainer:init(map)
     self.mapHeightPixels = self.mapHeight * self.tileHeight
 
     self.direction = 'left'
+
+    self.timer = 0
  
 end
 
 function Trainer:update(dt)
-        self.x = self.x + self.dx * dt * self.tileHeight * TRAINER_SPEED
-        self.y = self.y + self.dy * dt * self.tileWidth * TRAINER_SPEED
+    if self.timer % 15 == 0 then
+        self.x = self.x + self.tileHeight / 2 * self.dx * dt * self.tileHeight * TRAINER_SPEED
+        self.y = self.y + self.tileWidth / 2 * self.dy * dt * self.tileWidth * TRAINER_SPEED
+    end
+    self.timer = self.timer + 1
 end
 
 function Trainer:render()
