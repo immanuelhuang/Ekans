@@ -50,6 +50,6 @@ function love.keypressed(key)
 end
 
 function love.draw()
-    love.graphics.clear(97/255, 138/255, 61/255, 255/255)
+    love.graphics.clear(0/255, 0/255, 0/255, 255/255)
     map:render()
 end

@@ -34,8 +34,9 @@ end
 
 function Trainer:update(dt)
     if self.timer % 15 == 0 then
-        self.x = self.x + self.tileHeight / 2 * self.dx * dt * self.tileHeight * TRAINER_SPEED
-        self.y = self.y + self.tileWidth / 2 * self.dy * dt * self.tileWidth * TRAINER_SPEED
+        self.timer = self.timer - 15
+        self.x = self.x + 1 * self.dx
+        self.y = self.y + 1 * self.dy
     end
     self.timer = self.timer + 1
 end

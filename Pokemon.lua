@@ -16,14 +16,18 @@ function Pokemon:init(map)
     self.tileHeight = 32
     self.mapWidth = 20
     self.mapHeight = 20
+    self.dx = 0
+    self.dy = 0
+    self.x = X
+    self.y = Y
 
-    self.mapWidthPixels = self.mapWidth * self.tileWidth
+    self.mapWidthPixels = self.mapWidth * self.tileWidth 
     self.mapHeightPixels = self.mapHeight * self.tileHeight
 
 end
 
 function Pokemon:render()
 
-    love.graphics.draw(self.spritesheet, self.sprites[1], (X - 1) * self.tileWidth, (Y - 1) * self.tileHeight)
+    love.graphics.draw(self.spritesheet, self.sprites[1], (self.y - 1) * self.tileWidth, (self.x - 1) * self.tileHeight)
     
 end
