@@ -23,6 +23,9 @@ end
 function Map:update(dt)
     self.trainer:update(dt)
     self.currPokemon:update(dt)
+    for k, v in pairs(self.caughtPokemon) do
+        v:update(dt)
+    end
     if self.currPokemon.x == self.trainer.x and self.currPokemon.y == self.trainer.y then
         pokemon = self.currPokemon:clone()
         table.insert(self.caughtPokemon, pokemon)
@@ -35,13 +38,30 @@ end
 
   
 function Map:render()
-    push:apply('start')
-    for y = 1, self.mapHeight do
-        for x = 1, self.mapWidth do
-            love.graphics.draw(GRASS, (x - 1) * self.tileWidth, (y - 1) * self.tileHeight)
+    -- push:apply('start')
+    -- for y = 1, self.mapHeight do
+    --     for x = 1, self.mapWidth do
+    --         love.graphics.draw(GRASS, (x - 1) * self.tileWidth, (y - 1) * self.tileHeight)
+    --     end
+    -- end
+    -- push:apply('end')
+    for k, v in pairs(self.caughtPokemon) do
+        v.direction = self.trainer.direction
+        if self.trainer.direction == 'up' then
+            v.x = self.trainer.x + k
+            v.y = self.trainer.y
+        elseif self.trainer.direction == 'down' then
+            v.x = self.trainer.x - k
+            v.y = self.trainer.y
+        elseif self.trainer.direction == 'right' then
+            v.x = self.trainer.x
+            v.y = self.trainer.y - k
+        elseif self.trainer.direction == 'left' then
+            v.x = self.trainer.x
+            v.y = self.trainer.y + k
         end
+        v:render()
     end
-    push:apply('end')
     self.currPokemon:render()
     self.trainer:render()    
 end

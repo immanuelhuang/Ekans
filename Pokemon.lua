@@ -1,13 +1,13 @@
 require 'Util'
 
-local UP_1 = 5
-local UP_2 = 6
+local UP_1 = 7
+local UP_2 = 8
 local LEFT_1 = 3
 local LEFT_2 = 4
 local DOWN_1 = 1
 local DOWN_2 = 2
-local RIGHT_1 = 7
-local RIGHT_2 = 8
+local RIGHT_1 = 5
+local RIGHT_2 = 6
 
 Pokemon = Class{}
 
@@ -55,13 +55,13 @@ function Pokemon:update(dt)
 
 
     if self.direction == 'up' then
-        self.sprite = self.sprites[UP_1 + TRAINER_ANIMATION]
+        self.sprite = self.sprites[UP_1 + self.animation]
     elseif self.direction == 'down' then
-        self.sprite = self.sprites[DOWN_1 + TRAINER_ANIMATION]
+        self.sprite = self.sprites[DOWN_1 + self.animation]
     elseif self.direction == 'left' then
-        self.sprite = self.sprites[LEFT_1 + TRAINER_ANIMATION]
+        self.sprite = self.sprites[LEFT_1 + self.animation]
     elseif self.direction == 'right' then
-        self.sprite = self.sprites[RIGHT_1 + TRAINER_ANIMATION]
+        self.sprite = self.sprites[RIGHT_1 + self.animation]
     end
 
     self.timer = self.timer + 1

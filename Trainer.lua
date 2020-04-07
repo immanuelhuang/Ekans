@@ -2,15 +2,15 @@ require 'Util'
 
 Trainer = Class{}
 
-START = 1
-UP_1 = 2
-UP_2 = 3
-LEFT_1 = 5
-LEFT_2 = 6
-DOWN_1 = 8
-DOWN_2 = 9
-RIGHT_1 = 11
-RIGHT_2 = 12
+local START = 1
+local UP_1 = 2
+local UP_2 = 3
+local LEFT_1 = 5
+local LEFT_2 = 6
+local DOWN_1 = 8
+local DOWN_2 = 9
+local RIGHT_1 = 11
+local RIGHT_2 = 12
 
 TRAINER_ANIMATION = 0
 

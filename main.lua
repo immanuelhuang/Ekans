@@ -68,7 +68,9 @@ function love.keypressed(key)
 end
 
 function love.draw()        
-    love.graphics.clear(78/255, 153/255, 43/255, 255/255)
+    -- love.graphics.clear(78/255, 153/255, 43/255, 255/255)
+    love.graphics.clear(0/255, 0/255, 0/255, 255/255)
+
     map:render()
     push:apply('start')
     if gameState == 'start' then
