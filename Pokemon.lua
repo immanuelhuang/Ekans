@@ -19,7 +19,6 @@ local pokeNum = math.random(810)
 
 function Pokemon:init(map)
 
-    -- self.spritesheet = love.graphics.newImage('graphics/pokemon/005.png')
     self.spritesheet = love.graphics.newImage(string.format("graphics/pokemon/%03d.png", pokeNum))
     self.sprites = generateQuads(self.spritesheet, 32, 32)
 

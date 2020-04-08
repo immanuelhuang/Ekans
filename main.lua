@@ -46,9 +46,9 @@ function love.keypressed(key)
     if key == 'escape' then
         love.event.quit()
     end
-    if gameState == 'play' or gameState == 'start' then
+    if gameState == 'play' then
         if key == 'up' then
-            if map.trainer.direction ~= 'down' then
+            if map.trainer.direction ~= 'down' and map.trainer.direction ~= 'up'then
                 gameState = 'play'
                 map.trainer.dx = -1
                 map.trainer.dy = 0
@@ -57,7 +57,7 @@ function love.keypressed(key)
                 map.timer = 0
             end
         elseif key == 'down' then
-            if map.trainer.direction ~= 'up' then
+            if map.trainer.direction ~= 'down' and map.trainer.direction ~= 'up'then
                 gameState = 'play'
                 map.trainer.dx = 1
                 map.trainer.dy = 0
@@ -67,7 +67,7 @@ function love.keypressed(key)
 
             end
         elseif key == 'left' then
-            if map.trainer.direction ~= 'right' then
+            if map.trainer.direction ~= 'right' and map.trainer.direction ~= 'left' then
                 gameState = 'play'
                 map.trainer.dy = -1
                 map.trainer.dx = 0
@@ -77,7 +77,7 @@ function love.keypressed(key)
 
             end
         elseif key == 'right' then
-            if map.trainer.direction ~= 'left' then
+            if map.trainer.direction ~= 'right' and map.trainer.direction ~= 'left' then
                 gameState = 'play'
                 map.trainer.dy = 1
                 map.trainer.dx = 0
@@ -86,6 +86,36 @@ function love.keypressed(key)
                 map.timer = 0
 
             end
+        end
+    elseif gameState == 'start' then
+        if key == 'up' then
+            gameState = 'play'
+            map.trainer.dx = -1
+            map.trainer.dy = 0
+            map.trainer.direction = 'up'
+            TRAINER_ANIMATION = 0
+            map.timer = 0
+        elseif key == 'down' then
+            gameState = 'play'
+            map.trainer.dx = 1
+            map.trainer.dy = 0
+            map.trainer.direction = 'down'
+            TRAINER_ANIMATION = 0
+            map.timer = 0
+        elseif key == 'left' then
+            gameState = 'play'
+            map.trainer.dy = -1
+            map.trainer.dx = 0
+            map.trainer.direction = 'left'
+            TRAINER_ANIMATION = 0
+            map.timer = 0
+        elseif key == 'right' then
+            gameState = 'play'
+            map.trainer.dy = 1
+            map.trainer.dx = 0
+            map.trainer.direction = 'right'
+            TRAINER_ANIMATION = 0
+            map.timer = 0
         end
     elseif gameState == 'end' then
         if key == 'space' then

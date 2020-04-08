@@ -23,8 +23,8 @@ end
 
 function Map:update(dt)
     local pokeNum = math.random(810)
-    if self.timer % 10 == 0 then
-        self.timer = self.timer - 10
+    if self.timer % 60 == 0 then
+        self.timer = self.timer - 60
         local tempX = self.trainer.x
         local tempY = self.trainer.y
 
@@ -88,7 +88,33 @@ function Map:update(dt)
                 end
             end
         end
-       
+        for k, v in pairs(self.caughtPokemon) do
+            v:update(dt)
+        end
+        for i = tablelength(self.caughtPokemon), 1, -1 do
+            if i == 1 then
+                if self.trainer.x > self.caughtPokemon[i].x then
+                    self.caughtPokemon[i].direction = 'down'
+                elseif self.trainer.x < self.caughtPokemon[i].x then
+                    self.caughtPokemon[i].direction = 'up'
+                elseif self.trainer.y < self.caughtPokemon[i].y then
+                    self.caughtPokemon[i].direction = 'left'
+                elseif self.trainer.y > self.caughtPokemon[i].y then
+                    self.caughtPokemon[i].direction = 'right'
+                end
+            else
+                if self.caughtPokemon[i - 1].x > self.caughtPokemon[i].x then
+                    self.caughtPokemon[i].direction = 'down'
+                elseif self.caughtPokemon[i - 1].x < self.caughtPokemon[i].x then
+                    self.caughtPokemon[i].direction = 'up'
+                elseif self.caughtPokemon[i - 1].y < self.caughtPokemon[i].y then
+                    self.caughtPokemon[i].direction = 'left'
+                elseif self.caughtPokemon[i - 1].y > self.caughtPokemon[i].y then
+                    self.caughtPokemon[i].direction = 'right'
+                end  
+            end
+        end
+        
     end
     self.timer = self.timer + 1
 end
