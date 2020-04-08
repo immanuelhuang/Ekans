@@ -15,9 +15,9 @@
 Final project for CS50x course. Made with Lua and Love2D, a framework to make 2D games.
 
 ## Screenshots
-![Example screenshot](./screenshots/start.png)
-![Example screenshot](./screenshots/game.png)
-![Example screenshot](./screenshots/end.png)
+<img src="./screenshots/start.png" alt="Game Start" width="200"/>
+<img src="./screenshots/game.png" alt="During Game" width="200"/>
+<img src="./screenshots/end.png" alt="Game End" width="200"/>
 
 ## Controls
 * Movements with left, right, up, down
