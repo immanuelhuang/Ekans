@@ -23,8 +23,8 @@ end
 
 function Map:update(dt)
     local pokeNum = math.random(810)
-    if self.timer % 60 == 0 then
-        self.timer = self.timer - 60
+    if self.timer % 15 == 0 then
+        self.timer = self.timer - 15
         local tempX = self.trainer.x
         local tempY = self.trainer.y
 
