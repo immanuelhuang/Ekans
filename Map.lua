@@ -37,10 +37,12 @@ function Map:update(dt)
         for k, v in pairs(self.caughtPokemon) do
             if v.x == self.trainer.x and v.y == self.trainer.y then
                 gameState = 'end'
+                sounds['game_over']:play()
             end
         end
 
         if self.currPokemon.x == self.trainer.x and self.currPokemon.y == self.trainer.y then
+            sounds['caught']:play()
             pokemon = self.currPokemon:clone()
             table.insert(self.caughtPokemon, tablelength(self.caughtPokemon) + 1, pokemon)
             self.caughtPokemon[tablelength(self.caughtPokemon)].x = tempX
@@ -121,7 +123,6 @@ function Map:render()
         v:render()
 
     end
-
     self.currPokemon:render()
     self.trainer:render()    
 end

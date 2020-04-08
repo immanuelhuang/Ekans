@@ -23,9 +23,15 @@ function love.load()
         fullscreen = false,
         resizable = false
     })
+    
+    sounds = {
+        ['game_over'] = love.audio.newSource('sounds/end.wav', 'static'),
+        ['caught'] = love.audio.newSource('sounds/caught.wav', 'static'),
+    }
 
-    largeFont = love.graphics.newFont('fonts/pokemon_font.ttf', 16)
-    smallFont = love.graphics.newFont('fonts/regular_font.ttf', 8)
+    largeFont = love.graphics.newFont('fonts/pokemon_font.ttf', 100)
+    smallFont = love.graphics.newFont('fonts/regular_font.ttf', 50)
+    miniFont = love.graphics.newFont('fonts/pokemon_font.ttf', 25)
 
     gameState = 'start'
 end
@@ -48,6 +54,7 @@ function love.keypressed(key)
                 map.trainer.dy = 0
                 map.trainer.direction = 'up'
                 TRAINER_ANIMATION = 0
+                map.timer = 0
             end
         elseif key == 'down' then
             if map.trainer.direction ~= 'up' then
@@ -56,6 +63,8 @@ function love.keypressed(key)
                 map.trainer.dy = 0
                 map.trainer.direction = 'down'
                 TRAINER_ANIMATION = 0
+                map.timer = 0
+
             end
         elseif key == 'left' then
             if map.trainer.direction ~= 'right' then
@@ -64,6 +73,8 @@ function love.keypressed(key)
                 map.trainer.dx = 0
                 map.trainer.direction = 'left'
                 TRAINER_ANIMATION = 0
+                map.timer = 0
+
             end
         elseif key == 'right' then
             if map.trainer.direction ~= 'left' then
@@ -72,6 +83,8 @@ function love.keypressed(key)
                 map.trainer.dx = 0
                 map.trainer.direction = 'right'
                 TRAINER_ANIMATION = 0
+                map.timer = 0
+
             end
         end
     elseif gameState == 'end' then
@@ -84,19 +97,18 @@ end
 
 function love.draw()        
     love.graphics.clear(78/255, 153/255, 43/255, 255/255)
-    -- love.graphics.clear(0/255, 0/255, 0/255, 255/255)
 
     map:render()
-    push:apply('start')
     if gameState == 'start' then
         love.graphics.setFont(largeFont)
-        love.graphics.printf({{255, 255, 0, 255}, 'EKANS'}, 0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf({{255, 255, 0, 255}, 'EKANS'}, 0, 10, WINDOW_WIDTH, 'center')
     elseif gameState == 'end' then
         love.graphics.setFont(largeFont)
-        love.graphics.printf({{255, 255, 0, 255}, 'GAME OVER'}, 0, 10, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf({{255, 255, 0, 255}, 'GAME OVER'}, 0, 200, WINDOW_WIDTH, 'center')
         love.graphics.setFont(smallFont)
-        love.graphics.printf({{255, 255, 0, 255}, 'SPACE TO RESTART'}, 0, 50, VIRTUAL_WIDTH, 'center')
+        love.graphics.printf({{255, 255, 0, 255}, 'SPACE TO RESTART'}, 0, 50, WINDOW_WIDTH, 'center')
     end
 
-    push:apply('end')
+    love.graphics.setFont(miniFont)
+    love.graphics.printf({{255, 0, 0, 255}, tablelength(map.caughtPokemon)}, -10, 5, WINDOW_WIDTH, 'right')
 end
